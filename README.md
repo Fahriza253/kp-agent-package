@@ -1,58 +1,86 @@
 # Paket Agen Penulisan Laporan KP (Cursor)
 
-Paket ini berisi rules dan skill Cursor untuk membantu penulisan Laporan Kerja Praktik Teknik Informatika UNPI Cianjur. Strukturnya memisahkan lapisan reusable (dapat dipakai untuk skripsi atau makalah lain) dari lapisan khusus KP.
+Paket skill dan rules Cursor untuk Laporan Kerja Praktik Teknik Informatika UNPI Cianjur. Lapisan **reusable** (`skills/academic/`) dapat dipakai untuk skripsi atau makalah lain; lapisan **KP** (`skills/kp/`) mengikat pedoman dan alur naskah KP.
 
-## Isi paket
+## Struktur repositori
 
 ```
-.cursor/
-  rules/                       Aturan yang selalu atau sering aktif
-    kp-00-core.mdc             Aturan inti (selalu aktif)
-    kp-10-pedoman-format.mdc   Struktur dan format pedoman (aktif di laporan/)
-    kp-20-sitasi-apa.mdc       Sitasi dan daftar pustaka (aktif di laporan/)
-  skills/                      Skill yang dimuat sesuai tugas
-    academic-writing-core/     REUSABLE. Disiplin penulisan akademik umum
-    academic-humanize/         REUSABLE. Penghapusan pola mekanis, dengan daftar perubahan
-    kp-intent-router/          KP. Titik masuk: baca status, tentukan intent, muat skill
-    kp-draft-section/          KP. Menulis atau merevisi satu bab atau subbab
-    kp-ideation/               KP. Brainstorm dan adu gagasan, tanpa mengubah naskah
-    kp-audit/                  KP. Mode gap (celah improvement), audit, dan validate
-    kp-source-learning/        KP. Belajar dari sumber menjadi catatan pola
-    kp-docx-sync/              KP. Sinkronisasi Markdown ke DOCX lewat generator
-docs/agents/
-  progress-laporan.md          Status kemajuan, dibaca pertama oleh agen
+skills/
+  academic/                  Skill reusable (SKILL.md per folder)
+  kp/                        Skill khusus KP
+.agents/skills/              Salinan untuk dogfooding + skill engineering pihak ketiga
+.cursor/rules/               Rules KP (.mdc); salin ke workspace laporan
+docs/agents/                 Dokumentasi agen (domain, progress template, dll.)
 ```
 
-## Status saat ini
+## Pemasangan di workspace laporan
 
-Paket ini bisa dipasang sekarang. Semua rujukan di rules dan skill mengarah ke berkas yang sudah ada di repositori, atau sudah ada di unggahan (`scripts/check_project_markdown.py`, `docs/agents/penulisan-kp-skills.md`, `docs/agents/laporan-naskah.md`, `docs/agents/generate-laporan-docx.md`, `docs/agents/domain.md`).
+Ganti `<owner>/<repo>` dengan URL GitHub paket ini setelah dipublish.
 
-Yang sudah diuji di repositori tiruan:
+### 1. Skill (Skills CLI)
 
-- `scripts/check_project_markdown.py` berjalan dan mendeteksi em dash di akar repositori.
-- Skrip itu melewati `laporan/archive/`, sehingga `DRAFT_KP.md` tidak terperiksa otomatis (sudah ditangani di `kp-audit` mode validate).
-- Nama setiap skill sama dengan nama foldernya, dan setiap rules punya frontmatter.
+Dari root repositori laporan:
 
-Yang belum diuji:
+```bash
+npx skills@latest add <owner>/<repo> -a cursor
+```
 
-- Generator DOCX belum dijalankan, karena template Word resmi tidak ada di unggahan.
-- Perilaku Cursor (globs, alwaysApply, pemuatan skill) belum diuji di Cursor sendiri.
+Pilih skill yang diinginkan (semua `kp-*` dan/atau `academic-*`). CLI memasang ke **`.agents/skills/<nama>/`**. Untuk skill global di semua proyek, tambahkan `-g`.
 
-## Pemasangan
+Lihat [Agent Skills (Cursor)](https://cursor.com/docs/skills).
 
-1. Salin folder `.cursor/` ke root repositori laporan, sejajar dengan `AGENTS.md`. Jika repositori sudah punya `.cursor/`, gabungkan isinya.
-2. Salin `docs/agents/progress-laporan.md`, lalu isi bagian status sesuai kondisi sekarang.
-3. Buat folder `docs/agents/knowledge/` (kosong) untuk hasil belajar dari sumber.
-4. Pastikan rujukan di rules dan skill masih ada: `resources/PEDOMAN-KP-2026.md`, `laporan/ARCHIVE/DRAFT_KP.md`, `scripts/check_project_markdown.py`, `scripts/generate_laporan_docx.py`, `docs/agents/generate-laporan-docx.md`. Jika belum ada, buat atau sesuaikan path.
-5. Buka Cursor, lalu mulai sesi baru dengan permintaan seperti: "Cek posisi laporan, lalu ringkas BAB IV."
+### 2. Rules (langkah terpisah)
 
-## Cara kerja agen
+Rules **tidak** ikut instalasi `npx skills`. Pilih salah satu:
 
-1. `kp-00-core.mdc` selalu aktif. Ia menetapkan bahasa, sumber kebenaran, daftar konfirmasi, dan aturan anti-fabrikasi.
-2. Tugas dimulai dari `kp-intent-router`. Skill ini membaca `progress-laporan.md`, menentukan intent, lalu memuat skill yang relevan.
-3. Untuk menulis atau merevisi, `kp-draft-section` memanggil `academic-writing-core` dan rules format serta sitasi.
-4. Setelah draf selesai, pengguna dapat meminta `kp-audit` atau memanggil agen lain untuk `academic-humanize`. Agen lain harus membaca rules proyek dan menerima brief serah terima.
-5. Perubahan substantif, sitasi baru, penulisan ke knowledge base, dan pembuatan DOCX selalu menunggu konfirmasi.
+**A. Skill `kp-install-rules`** (disarankan, ikut bundle skill):
+
+```bash
+bash .agents/skills/kp-install-rules/scripts/install-rules.sh .
+```
+
+**B. Salin manual** dari repo GitHub:
+
+```bash
+mkdir -p .cursor/rules
+cp -R /path/to/kp-agent-package/.cursor/rules/* .cursor/rules/
+```
+
+Pastikan `kp-00-core.mdc`, `kp-10-pedoman-format.mdc`, dan `kp-20-sitasi-apa.mdc` ada di workspace.
+
+### 3. Struktur laporan
+
+Di repo laporan (bukan di paket ini), siapkan antara lain:
+
+- `docs/agents/progress-laporan.md` (salin dari template di skill `kp-install-rules` atau `docs/agents/templates/progress-laporan.md` di repo paket)
+- `docs/agents/knowledge/` (kosong, untuk hasil belajar sumber)
+- Path sesuai tabel di `kp-00-core.mdc` (`laporan/`, `resources/PEDOMAN-KP-2026.md`, `scripts/`, dll.)
+
+Mulai sesi dengan permintaan seperti: "Cek posisi laporan, lalu ringkas BAB IV." Agen memuat `kp-intent-router` lewat discovery skill Cursor.
+
+## Pengembangan paket ini
+
+1. Edit skill di `skills/kp/` atau `skills/academic/`.
+2. Edit rules di `.cursor/rules/` (kanonik), lalu jalankan:
+
+   ```bash
+   npm run sync:skills
+   # atau: bash scripts/sync_catalog_to_agents.sh
+   ```
+
+   Skrip menyelaraskan `.agents/skills/` dan bundle rules di `kp-install-rules`.
+3. Skill engineering: `npx skills@latest add mattpocock/skills -a cursor` (pin di `skills-lock.json`).
+
+## Verifikasi CLI
+
+Diuji: `npx skills@latest add <path-atau-github-repo> -a cursor -y` mendeteksi **9 skill** di `skills/academic/` dan `skills/kp/` (termasuk `kp-install-rules`).
+
+## Cara kerja agen (di repo laporan)
+
+1. `kp-00-core.mdc` selalu aktif.
+2. Tugas dimulai dari skill `kp-intent-router`.
+3. DRAFT/REVISE memakai `kp-draft-section` + `academic-writing-core`.
+4. Perubahan substantif, sitasi, knowledge, dan DOCX menunggu konfirmasi (lihat rule inti).
 
 ## Peta intent
 
@@ -69,26 +97,21 @@ Yang belum diuji:
 | SYNC       | kp-docx-sync                   |
 | STATUS     | progress-laporan.md            |
 
-Catatan penamaan: di dalam skill, singkatan `kp-10` dan `kp-20` merujuk ke `kp-10-pedoman-format.mdc` dan `kp-20-sitasi-apa.mdc`.
+Singkatan `kp-10` dan `kp-20` di dalam skill merujuk ke `kp-10-pedoman-format.mdc` dan `kp-20-sitasi-apa.mdc`.
 
 ## Memakai ulang di proyek lain
 
-- Salin `academic-writing-core` dan `academic-humanize` apa adanya. Keduanya tidak memuat aturan KP.
-- Untuk skripsi atau makalah lain, buat ulang lapisan proyek: rules format dan sitasi sesuai pedoman baru, lalu skill `kp-draft-section` versi baru yang menunjuk ke sumber proyek itu.
-- Jangan menyalin `kp-00-core.mdc` tanpa mengganti path sumber kebenaran dan daftar konfirmasi.
+- Install hanya `academic-writing-core` dan `academic-humanize` lewat CLI.
+- Untuk skripsi atau makalah: rules format baru + skill draft versi proyek Anda.
 
-## Keputusan atas konflik
-
-Keputusan pengguna sudah diterapkan di rules dan skill:
+## Keputusan atas konflik (naskah KP)
 
 1. Bab V mengikuti pedoman, tanpa subjudul tersendiri.
-2. _Sehingga_ dan _sedangkan_ tidak boleh di awal kalimat. Kemunculannya di draf didaftar, tidak diubah otomatis.
-3. Sitasi tiga penulis atau lebih memakai _et al._, tanggal tidak tersedia memakai _n.d._, dan sitasi dua penulis selalu memakai "&".
+2. _Sehingga_ dan _sedangkan_ tidak di awal kalimat (did audit, tidak diubah otomatis).
+3. Sitasi: _et al._ untuk 3+ penulis, _n.d._ jika tanggal tidak ada, "&" untuk dua penulis.
 
-Migrasi entri _t.t._ di draf ke _n.d._ masih memerlukan konfirmasi per batch. Istilah "Skripsi" pada sampul pedoman dilewati atas permintaan pengguna. Empat berkas di `uploads/` juga ada dalam dua versi dengan akhiran `_1` yang isinya identik, sehingga cukup satu salinan yang dipakai.
+## Yang perlu diverifikasi
 
-## Yang perlu diverifikasi sebelum dipakai
-
-- Versi APA yang berlaku. Saat paket ini dibuat, edisi ke-7 (2019) yang terkonfirmasi. Edisi lebih baru belum terverifikasi dan harus dicek di apastyle.apa.org.
-- Perilaku Cursor untuk `globs` dan `alwaysApply` pada versi yang dipakai di tim Anda. Cek dokumentasi Cursor terbaru.
-- Path skrip dan dokumentasi generator DOCX yang tidak termuat dalam unggahan ini.
+- Edisi APA yang berlaku di kampus.
+- Perilaku Cursor untuk `paths`, `alwaysApply`, dan discovery skill di versi tim Anda.
+- URL repo GitHub untuk `npx skills add` setelah publish (path lokal sudah valid untuk uji).

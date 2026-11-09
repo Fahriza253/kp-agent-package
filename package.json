@@ -1,0 +1,8 @@
+{
+  "name": "kp-agent-package",
+  "private": true,
+  "description": "Cursor skills and rules for UNPI Cianjur KP report writing",
+  "scripts": {
+    "sync:skills": "bash scripts/sync_catalog_to_agents.sh"
+  }
+}

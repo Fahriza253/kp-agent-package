@@ -1,0 +1,60 @@
+---
+description: Aturan sitasi dan daftar pustaka untuk Laporan KP. Dasar APA 7 dengan penyesuaian pedoman KP. Aktif saat menyentuh sitasi, daftar pustaka, atau sumber.
+globs:
+  - "laporan/**/*.md"
+  - "docs/agents/knowledge/**/*.md"
+alwaysApply: false
+---
+
+# Sitasi dan Daftar Pustaka
+
+## Dasar
+
+- Gaya dasar: **APA Style edisi ke-7** (*Publication Manual of the American Psychological Association*, 7th ed., terbit 2019). Pada saat aturan ini dibuat, edisi ke-7 adalah edisi terbaru yang dapat dikonfirmasi dari sumber resmi. Sebelum menulis sitasi baru, agen wajib memeriksa panduan terkini di apastyle.apa.org, karena klaim tentang edisi baru tidak boleh diterima tanpa verifikasi.
+- Pedoman KP BAB III.F dan III.G mengatur bentuk nama penulis dan daftar pustaka. Penyesuaian yang dipakai saat ini tercantum di bawah. Setiap penyesuaian yang belum dikonfirmasi ditandai.
+
+## Penyesuaian terhadap pedoman (sementara, perlu konfirmasi)
+
+| Aspek                              | APA 7 standar                       | Pedoman KP / draf saat ini         | Status                 |
+| ---------------------------------- | ----------------------------------- | ---------------------------------- | ---------------------- |
+| Sitasi dengan 3 atau lebih penulis | *et al.*                            | *dkk.* (pedoman F.1)               | Diputuskan: *et al.*   |
+| Tanggal tidak tersedia             | *n.d.*                              | *t.t.* (dipakai draf)              | Diputuskan: *n.d.*     |
+| Semua penulis di daftar pustaka    | Hingga 20 penulis                   | Semua penulis (pedoman F.2)        | Sesuai                 |
+| Bahasa sitasi di teks              | Sesuai bahasa sumber                | Konsisten dengan bahasa sumber     | Dilewati (tidak dibahas) |
+
+Untuk penyesuaian yang belum diputuskan, agen tidak boleh memilih sendiri. Tanyakan dulu, lalu catat keputusan di `docs/agents/progress-laporan.md`.
+
+## Aturan dasar
+
+1. Setiap sumber di teks harus ada di daftar pustaka, dan setiap entri daftar pustaka harus diacu di teks (pedoman G).
+2. Jangan menambahkan sumber yang belum diverifikasi keberadaannya. Verifikasi berarti membuka halaman sumber, DOI, atau dokumen aslinya. Jika tidak bisa diakses, tandai `[PERLU VERIFIKASI SUMBER]`.
+3. Jangan membuat sitasi dari ingatan untuk detail seperti halaman, volume, nomor edisi, atau DOI. Gunakan detail dari sumber yang dibuka.
+4. Sumber dari `resources/journal/` hanya dikutip setelah konfirmasi eksplisit pengguna (AGENTS.md).
+5. Dokumen institusi (peraturan, pedoman) dikutip sebagai penulis korporat sesuai APA. Contoh pola: *(Kementerian Pendidikan Tinggi, Sains, dan Teknologi, 2025)*.
+6. Sumber web dicantumkan dengan URL. Tanggal akses tidak wajib kecuali konten dapat berubah dan panduan tidak mewajibkannya. Konfirmasi sebelum menambahkan tanggal akses.
+
+## Contoh pola (APA 7)
+
+Teks:
+- Satu penulis: (Pressman, 2020) atau Pressman (2020) menjelaskan...
+- Dua penulis: selalu memakai "&", baik dalam kurung (Elmasri & Navathe, 2016) maupun dalam kalimat narasi (Elmasri & Navathe, 2016). Keputusan pengguna: "&" dipakai di semua posisi.
+- Tiga penulis atau lebih: (Silberschatz et al., 2020). Berlaku sejak kemunculan pertama dalam teks.
+
+Daftar pustaka (urutan abjad berdasarkan nama keluarga penulis pertama):
+- Buku: Pressman, R. S., & Maxim, B. R. (2020). *Software engineering: A practitioner's approach* (9th ed.). McGraw-Hill Education.
+- Jurnal: Penulis, A. A., & Penulis, B. B. (Tahun). Judul artikel. *Nama Jurnal, volume*(nomor), halaman. https://doi.org/xxxx
+- Dokumen web: Lembaga. (Tahun). *Judul halaman*. Nama situs. URL
+
+Perhatikan bahwa APA 7 tidak mencantumkan kota penerbit dan tidak memakai awalan "Diakses dari" untuk DOI atau URL.
+
+## Migrasi dari draf saat ini
+
+Draf memuat *t.t.* pada beberapa entri daftar pustaka dan teks. Penggantian ke *n.d.* adalah perubahan sitasi, sehingga tetap memerlukan konfirmasi pengguna untuk setiap batch yang diubah. Catat hasil migrasi di `docs/agents/progress-laporan.md`.
+
+## Yang harus diperiksa sebelum menyerahkan
+
+- Tidak ada sumber di teks yang tidak ada di daftar pustaka, atau sebaliknya.
+- Tahun di teks sama dengan tahun di daftar pustaka.
+- Tidak ada `[PERLU VERIFIKASI SUMBER]` yang tersisa tanpa sepengetahuan pengguna.
+- Format nama penulis konsisten di seluruh daftar.
+- Sumber yang sama tidak diberi dua entri berbeda hanya karena perbedaan kecil pada judul atau tahun.

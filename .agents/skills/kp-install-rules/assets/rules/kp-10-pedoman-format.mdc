@@ -1,0 +1,56 @@
+---
+description: Aturan struktur bab dan format naskah Laporan KP sesuai Pedoman KP 2026 FT UNPI. Aktif saat menyentuh draf, revisi, atau dokumen laporan.
+globs:
+  - "laporan/**/*.md"
+  - "revisi/**/*.md"
+  - "docs/agents/knowledge/**/*.md"
+alwaysApply: false
+---
+
+# Struktur dan Format Naskah KP (Pedoman 2026)
+
+Sumber rinci: `resources/PEDOMAN-KP-2026.md`. Rule ini adalah ringkasan operasional. Bila ada perbedaan, pedoman menang.
+
+## Urutan bagian utama
+
+Bagian utama terdiri dari enam bab. Gunakan judul yang sama dengan pedoman, dan urutkan subbab sesuai draf yang sudah disetujui.
+
+| Bab  | Judul pedoman                                 | Isi wajib menurut pedoman                                                                                  |
+| ---- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| I    | Pendahuluan                                   | Latar belakang, identifikasi masalah, rumusan masalah, batasan masalah, tujuan dan manfaat, metode pengumpulan data, lokasi, sistematika penulisan |
+| II   | Kajian Pustaka                                | Profil perusahaan (sejarah, struktur organisasi, bidang usaha), landasan teori yang menjadi dasar bab IV dan V |
+| III  | Sarana dan Prasarana                          | Sarana dan prasarana yang dipakai untuk analisis dan penyelesaian masalah                                  |
+| IV   | Analisis dan Pembahasan                       | Bahan atau materi masalah, alat, tata cara penyelesaian, variabel dan data, cara analisis, model analisis  |
+| V    | Implementasi (Hasil Magang) dan Pengujian     | Hasil penerapan dan uji coba, terpadu, tidak dipecah menjadi subjudul tersendiri (lihat catatan)           |
+| VI   | Penutup                                       | 6.1 Kesimpulan (ringkas, berdasarkan bab IV), 6.2 Saran (perusahaan dan ilmu pengetahuan)                  |
+
+Bagian awal dan akhir: halaman sampul, judul, pengesahan, surat keterangan perusahaan, penilaian pembimbing tempat magang, kata pengantar, daftar isi, daftar tabel dan gambar (bila banyak), daftar lampiran (bila banyak), daftar pustaka, dan lampiran.
+
+**Keputusan:** Bab V mengikuti pedoman, yaitu satu bab terpadu tanpa subjudul tersendiri (BAB III.B). Subjudul bab V dalam panduan `.custom-skills/` tidak dipakai.
+
+## Aturan penulisan kalimat
+
+1. Kata hubung *sehingga* dan *sedangkan* tidak boleh di awal kalimat (pedoman E.4.a). Aturan ini diterapkan penuh untuk dua kata itu. Agen mendaftar kemunculannya di draf sebagai daftar revisi, tanpa mengubahnya otomatis. Kata lain seperti *namun* dan *oleh karena itu* tidak termasuk aturan ini kecuali pengguna memutuskan lain.
+2. Hindari "di mana" dan "dari" sebagai terjemahan langsung dari *where* dan *of* (pedoman E.4.b).
+3. Hindari kata ganti orang. Gunakan "penulis" atau bentuk pasif bila perlu (pedoman E.2). Pedoman tidak melarang bentuk pasif.
+4. Awalan *ke-* dan *di-* dibedakan dari kata depan *ke* dan *di* (pedoman E.4.c).
+5. Bilangan ditulis dengan angka, kecuali di awal kalimat, yang harus dieja (pedoman B.10.a). Desimal memakai koma, misalnya 50,5 (B.10.b). Satuan SI tanpa titik di belakang singkatan (B.10.c).
+6. Istilah Indonesia didahulukan. Istilah asing yang dipertahankan ditulis miring pada kemunculan pertama.
+7. Rincian ke bawah memakai angka atau huruf. Tanda hubung di depan rincian tidak dibenarkan (pedoman B.8). Dalam Markdown, daftar bernomor lebih sesuai.
+8. Pengacuan nama penulis dalam uraian memakai nama keluarga atau nama utama, misalnya "Menurut Jogiyanto (2000)". Lebih dari dua penulis cukup nama pertama diikuti *dkk.* atau *et al.* (lihat aturan sitasi).
+
+## Judul, tabel, gambar, persamaan
+
+- Judul bab ditulis huruf kapital semua, tebal, simetris, tanpa titik di akhir.
+- Subjudul memakai huruf awal kapital pada setiap kata kecuali kata penghubung dan kata depan. Anak subjudul hanya huruf pertama yang kapital.
+- Judul tabel diletakkan di atas tabel tanpa titik. Judul gambar diletakkan di bawah gambar tanpa titik.
+- Penomoran tabel dan gambar memakai nomor bab, misalnya Tabel IV.1 atau Gambar IV.2 (pedoman C.2 dan D). Bila tabel meluas ke halaman berikutnya, tulis "(lanjutan)".
+- Nomor persamaan ditulis dalam kurung di tepi kanan.
+- Bagan, grafik, peta, dan foto disebut gambar. Skala dan satuan grafik harus jelas.
+
+## Isi yang dijaga
+
+- **Bab IV** harus menjelaskan bahan atau materi masalah, alat, tata cara penyelesaian, variabel dan data, serta cara analisis. Jika salah satu belum ada, tandai sebagai `[KONFIRMASI: ...]`.
+- **Bab V** harus memuat hasil penerapan dan uji coba, termasuk perbandingan dengan hasil sebelumnya bila ada. Uji yang belum dilaksanakan tidak boleh dinyatakan sebagai hasil.
+- **Kata pengantar** tidak memuat hal yang bersifat ilmiah. Ditutup tanggal dan tanda tangan penulis.
+- **Penomoran halaman**: bagian awal memakai angka Romawi kecil, bagian utama dan akhir memakai angka Arab mulai Bab I.
