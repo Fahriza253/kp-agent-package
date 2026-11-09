@@ -29,34 +29,26 @@ Pilih skill yang diinginkan (semua `kp-*` dan/atau `academic-*`). CLI memasang k
 
 Lihat [Agent Skills (Cursor)](https://cursor.com/docs/skills).
 
-### 2. Rules (langkah terpisah)
+### 2. Bootstrap repo (disarankan)
 
-Rules **tidak** ikut instalasi `npx skills`. Pilih salah satu:
-
-**A. Skill `kp-install-rules`** (disarankan, ikut bundle skill):
+Rules **tidak** ikut instalasi `npx skills`. Untuk repo laporan baru, minta agen menjalankan skill **`setup-kp-repo`** (intent SETUP), atau jalankan berurutan:
 
 ```bash
-bash .agents/skills/kp-install-rules/scripts/install-rules.sh .
+bash .agents/skills/setup-kp-rules/scripts/install-rules.sh .
+bash .agents/skills/setup-kp-scaffold/scripts/scaffold.sh .
+bash .agents/skills/setup-kp-tooling/scripts/install-tooling.sh .
+bash .agents/skills/setup-kp-repo/scripts/verify-layout.sh .
 ```
 
-**B. Salin manual** dari repo GitHub:
+Alias rules: `kp-install-rules` memakai bundle yang sama dengan `setup-kp-rules`.
 
-```bash
-mkdir -p .cursor/rules
-cp -R /path/to/kp-agent-package/.cursor/rules/* .cursor/rules/
-```
+### 3. Isian manual setelah scaffold
 
-Pastikan `kp-00-core.mdc`, `kp-10-pedoman-format.mdc`, dan `kp-20-sitasi-apa.mdc` ada di workspace.
+- `resources/PEDOMAN-KP-2026.md` (dari sumber kampus)
+- DOCX resmi di `laporan/`; path dicatat di `docs/agents/progress-laporan.md`
+- Opsional: submodule `siakad/`, folder `.custom-skills/my-research-paper-writing/`
 
-### 3. Struktur laporan
-
-Di repo laporan (bukan di paket ini), siapkan antara lain:
-
-- `docs/agents/progress-laporan.md` (salin dari template di skill `kp-install-rules` atau `docs/agents/templates/progress-laporan.md` di repo paket)
-- `docs/agents/knowledge/` (kosong, untuk hasil belajar sumber)
-- Path sesuai tabel di `kp-00-core.mdc` (`laporan/`, `resources/PEDOMAN-KP-2026.md`, `scripts/`, dll.)
-
-Mulai sesi dengan permintaan seperti: "Cek posisi laporan, lalu ringkas BAB IV." Agen memuat `kp-intent-router` lewat discovery skill Cursor.
+Mulai sesi dengan: "Setup repo KP" atau "Cek posisi laporan, lalu ringkas BAB IV." Agen memuat `kp-intent-router` (SETUP atau STATUS/DRAFT).
 
 ## Pengembangan paket ini
 
@@ -73,7 +65,7 @@ Mulai sesi dengan permintaan seperti: "Cek posisi laporan, lalu ringkas BAB IV."
 
 ## Verifikasi CLI
 
-Diuji: `npx skills@latest add <path-atau-github-repo> -a cursor -y` mendeteksi **9 skill** di `skills/academic/` dan `skills/kp/` (termasuk `kp-install-rules`).
+Diuji: `npx skills@latest add <path-atau-github-repo> -a cursor -y` mendeteksi skill di `skills/academic/` dan `skills/kp/` (termasuk keluarga `setup-kp-*` dan `kp-install-rules`).
 
 ## Cara kerja agen (di repo laporan)
 
@@ -95,6 +87,7 @@ Diuji: `npx skills@latest add <path-atau-github-repo> -a cursor -y` mendeteksi *
 | LEARN      | kp-source-learning             |
 | HUMANIZE   | academic-humanize              |
 | SYNC       | kp-docx-sync                   |
+| SETUP      | setup-kp-repo                  |
 | STATUS     | progress-laporan.md            |
 
 Singkatan `kp-10` dan `kp-20` di dalam skill merujuk ke `kp-10-pedoman-format.mdc` dan `kp-20-sitasi-apa.mdc`.

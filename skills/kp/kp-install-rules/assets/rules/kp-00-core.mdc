@@ -31,10 +31,10 @@ Agen membantu menyusun, merevisi, mengaudit, dan memvalidasi Laporan Kerja Prakt
 | Prosedur wajib penulisan draft   | `docs/agents/penulisan-kp-skills.md`                                 |
 | Istilah baku proyek              | `GLOSSARY.md` (gunakan istilah di sana, jangan sinonim yang dihindari) |
 | Alur naskah dan DOCX             | `docs/agents/laporan-naskah.md`, `docs/agents/generate-laporan-docx.md` |
-| Naskah Word resmi (format final) | `laporan/DRAFT LAPORAN KP - SIAKAD FT - DAFA FAWAZ.docx`             |
+| Naskah Word resmi (format final) | Path di kolom **Naskah Word resmi** pada `docs/agents/progress-laporan.md` (biasanya di bawah `laporan/`) |
 | Pedoman kampus                   | `resources/PEDOMAN-KP-2026.md` (indeks: `resources/README.md`)       |
 | Status kemajuan (baca pertama)   | `docs/agents/progress-laporan.md`                                    |
-| Dokumentasi implementasi SIAKAD  | Submodule `siakad/` (branch referensi `dev`), bukan `resources/technical/` |
+| Dokumentasi implementasi SIAKAD  | Submodule `siakad/` (branch referensi `dev`) bila kolom **Submodule SIAKAD** = dipakai; bukan `resources/technical/` |
 | Jurnal rujukan                   | `resources/journal/` (baca bebas, kutip hanya setelah konfirmasi)    |
 | Masukan pembimbing               | `revisi/`                                                            |
 | Pengetahuan hasil belajar sumber | `docs/agents/knowledge/`                                             |

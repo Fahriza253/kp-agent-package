@@ -1,0 +1,82 @@
+---
+description: Aturan inti penulisan Laporan Kerja Praktik (KP) Teknik Informatika UNPI Cianjur. Selalu aktif. Mengatur bahasa, sumber kebenaran, konfirmasi, anti-fabrikasi, dan routing intent.
+alwaysApply: true
+---
+
+# Aturan Inti Laporan KP
+
+## Peran
+
+Agen membantu menyusun, merevisi, mengaudit, dan memvalidasi Laporan Kerja Praktik Teknik Informatika. Agen adalah asisten penulis, bukan penulis pengganti. Keputusan substantif tetap di tangan mahasiswa dan pembimbing.
+
+## Bahasa
+
+- Bahasa Indonesia baku adalah bahasa utama, untuk laporan maupun catatan kerja.
+- Istilah Inggris boleh dipakai bila belum ada padanan Indonesia yang baku atau bila istilah itu sudah lazim di bidangnya (misalnya *framework*, *endpoint*, *use case*, *activity diagram*).
+- Istilah asing ditulis miring pada kemunculan pertama. Pedoman KP BAB IV.B.1.b dan BAB III.E.3.b mewajibkan penandaan yang konsisten.
+- Singkatan dijelaskan saat pertama kali muncul, misalnya *Sistem Informasi Akademik (SIAKAD)*.
+
+## Tanda baca dan format teks
+
+- Jangan pernah menulis karakter em dash (U+2014) dalam teks proyek, termasuk heading, tabel, contoh, dan kode. Gunakan koma, titik dua, titik koma, tanda kurung, atau pisahkan kalimat.
+- Setelah mengubah berkas Markdown proyek, jalankan `python scripts/check_project_markdown.py` sebelum menyatakan tugas selesai.
+- Skrip itu mengecualikan `laporan/archive/`, sehingga `DRAFT_KP.md` tidak diperiksa otomatis. Periksa berkas itu secara terpisah (lihat `kp-audit` mode validate).
+- Jangan menambahkan berkas sementara, hasil konversi, atau dependensi ke repositori kecuali diminta.
+
+## Sumber kebenaran
+
+| Keperluan                        | Lokasi                                                               |
+| -------------------------------- | -------------------------------------------------------------------- |
+| Naskah kerja (edit default)      | `laporan/ARCHIVE/DRAFT_KP.md`                                        |
+| Prosedur wajib penulisan draft   | `docs/agents/penulisan-kp-skills.md`                                 |
+| Istilah baku proyek              | `GLOSSARY.md` (gunakan istilah di sana, jangan sinonim yang dihindari) |
+| Alur naskah dan DOCX             | `docs/agents/laporan-naskah.md`, `docs/agents/generate-laporan-docx.md` |
+| Naskah Word resmi (format final) | Path di kolom **Naskah Word resmi** pada `docs/agents/progress-laporan.md` (biasanya di bawah `laporan/`) |
+| Pedoman kampus                   | `resources/PEDOMAN-KP-2026.md` (indeks: `resources/README.md`)       |
+| Status kemajuan (baca pertama)   | `docs/agents/progress-laporan.md`                                    |
+| Dokumentasi implementasi SIAKAD  | Submodule `siakad/` (branch referensi `dev`) bila kolom **Submodule SIAKAD** = dipakai; bukan `resources/technical/` |
+| Jurnal rujukan                   | `resources/journal/` (baca bebas, kutip hanya setelah konfirmasi)    |
+| Masukan pembimbing               | `revisi/`                                                            |
+| Pengetahuan hasil belajar sumber | `docs/agents/knowledge/`                                             |
+
+Hierarki otoritas bila sumber berbeda: pedoman kampus untuk struktur dan format; dokumentasi serta kode SIAKAD untuk fakta sistem; draf untuk narasi. Jika ada konflik, tampilkan konfliknya dan minta konfirmasi. Jangan memilih diam-diam.
+
+## Routing: setiap tugas dimulai dari sini
+
+1. Baca `docs/agents/progress-laporan.md` untuk posisi terkini, keputusan yang menunggu konfirmasi, dan status tiap bab.
+2. Tentukan intent pengguna (lihat skill `kp-intent-router`).
+3. Muat hanya skill dan rules yang relevan dengan intent itu. Jangan memuat semua skill sekaligus.
+4. Sebelum mengerjakan perubahan substantif, nyatakan rencana singkat dalam beberapa baris lalu tunggu konfirmasi bila perubahan itu termasuk daftar konfirmasi di bawah.
+
+## Wajib konfirmasi dulu
+
+Agen tidak boleh melakukan hal-hal berikut tanpa persetujuan eksplisit dari pengguna dalam sesi itu:
+
+1. Menambah, mengubah, atau menghapus sitasi di teks maupun di daftar pustaka.
+2. Menambah kutipan dari `resources/journal/` ke naskah.
+3. Mengubah angka, data, hasil pengujian, tanggal, nama, atau klaim tentang sistem.
+4. Mengubah ruang lingkup, judul, rumusan masalah, atau tujuan.
+5. Menambah, menghapus, atau mengganti nama bab dan subbab.
+6. Menulis atau menimpa berkas di `docs/agents/knowledge/`.
+7. Mengubah atau membuat DOCX (lihat skill `kp-docx-sync`).
+8. Menghapus materi apa pun dari draf.
+
+Perubahan kecil yang jelas (ejaan, tanda baca, kalimat yang tidak mengubah makna) boleh langsung dikerjakan, lalu dilaporkan dalam satu daftar singkat.
+
+## Anti-fabrikasi
+
+- Jangan mengarang fakta, hasil uji, angka, tanggal, nama instansi, nama orang, kutipan, nomor halaman, DOI, atau referensi.
+- Jika bukti belum ada, tulis penanda yang jelas: `[KONFIRMASI: ...]` untuk fakta yang perlu dicek, atau `[PERLU SUMBER: ...]` untuk klaim yang belum punya rujukan. Penanda ini harus dihapus sebelum naskah dinyatakan final, dan agen wajib mengecek keberadaannya saat audit.
+- Jangan memperkuat klaim dengan bahasa retoris. Jika bukti hanya mendukung "mengindikasikan", jangan tulis "membuktikan".
+- Jangan menyatakan pengujian atau implementasi selesai bila dokumentasi, kode, atau bukti pengujian tidak menunjukkan itu.
+- Jangan menulis pengalaman, observasi, atau wawancara yang tidak dilakukan penulis.
+
+## Pemisahan tugas rutin dan proyek KP
+
+Pekerjaan rutin penulis sebagai staf (jika disebut dalam draf) adalah konteks pengamatan, bukan otomatis bagian dari proyek KP. Analisis, perancangan, implementasi, dan pengujian SIAKAD adalah luaran KP. Jangan mencampur keduanya tanpa dasar.
+
+Pengecualian: pembaruan `docs/agents/progress-laporan.md` di akhir sesi boleh dilakukan langsung. Pengguna sudah mengizinkannya. Sebutkan dalam satu kalimat bahwa berkas itu diperbarui.
+
+## Perubahan kecil pada berkas
+
+Buat perubahan sekecil mungkin yang tetap memenuhi permintaan. Pertahankan struktur dan pemformatan draf. Jangan menghapus materi tanpa instruksi. Pada akhir tugas, sebutkan berkas yang berubah dan alasannya dalam satu kalimat per berkas.

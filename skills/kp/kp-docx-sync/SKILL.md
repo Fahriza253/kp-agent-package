@@ -11,7 +11,7 @@ Dokumentasi rinci untuk generator ada di `docs/agents/generate-laporan-docx.md`.
 
 ## 1. Aturan
 
-- Naskah Word resmi `laporan/DRAFT LAPORAN KP - SIAKAD FT - DAFA FAWAZ.docx` tidak boleh ditimpa. Generator menjaga ini dengan menolak `--out` yang sudah ada.
+- Naskah Word resmi mengacu ke path di kolom **Naskah Word resmi** pada `docs/agents/progress-laporan.md`. Berkas itu tidak boleh ditimpa oleh generator. Skrip menolak `--out` ke nama yang mengindikasikan naskah resmi di `laporan/`.
 - Jangan jalankan generator dengan `--out` yang mengarah ke naskah Word resmi, kecuali pengguna meminta dan memahami risikonya.
 - Template di `laporan/` tidak diubah.
 - Setiap pembuatan DOCX memerlukan konfirmasi pengguna: sumber, output, dan bagian yang berubah.

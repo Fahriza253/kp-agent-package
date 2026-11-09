@@ -21,11 +21,13 @@ sync_category() {
 sync_category academic
 sync_category kp
 
-RULES_ASSETS="$ROOT/skills/kp/kp-install-rules/assets/rules"
-if [ -d "$RULES_ASSETS" ]; then
-  mkdir -p "$RULES_ASSETS"
-  cp "$ROOT/.cursor/rules/"*.mdc "$RULES_ASSETS/"
-  echo "updated: kp-install-rules/assets/rules from .cursor/rules"
-fi
+for rules_skill in kp-install-rules setup-kp-rules; do
+  RULES_ASSETS="$ROOT/skills/kp/$rules_skill/assets/rules"
+  if [ -d "$(dirname "$RULES_ASSETS")" ]; then
+    mkdir -p "$RULES_ASSETS"
+    cp "$ROOT/.cursor/rules/"*.mdc "$RULES_ASSETS/"
+    echo "updated: skills/kp/$rules_skill/assets/rules from .cursor/rules"
+  fi
+done
 
 echo "Done."

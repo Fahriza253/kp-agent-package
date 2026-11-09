@@ -1,9 +1,11 @@
 ---
 name: kp-install-rules
-description: Memasang rules Cursor untuk penulisan Laporan KP (.mdc) ke workspace pengguna. Gunakan setelah npx skills add, saat pengguna minta pasang rules, bootstrap repo laporan, atau rules kp-00 belum ada.
+description: Alias pemasangan rules KP. Utamakan setup-kp-rules atau setup-kp-repo untuk bootstrap baru. Memasang kp-00, kp-10, kp-20 ke .cursor/rules/.
 ---
 
 # KP Install Rules
+
+Skill ini **alias** untuk `setup-kp-rules` (bundle identik). Untuk repo baru, muat skill `setup-kp-repo` agar scaffold dan tooling ikut terpasang.
 
 Rules KP tidak ikut instalasi `npx skills`. Skill ini memasang bundle rules dari paket ke `.cursor/rules/` workspace.
 

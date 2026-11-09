@@ -8,8 +8,20 @@ Berkas ini dibaca pertama oleh agen (`kp-intent-router`). Perbarui di akhir seti
 | ---- | ----- |
 | Judul KP | [KONFIRMASI: judul] |
 | Naskah kerja (Markdown) | `laporan/ARCHIVE/DRAFT_KP.md` |
-| Naskah Word resmi | [KONFIRMASI: path docx] |
+| Naskah Word resmi | [KONFIRMASI: path docx di bawah laporan/] |
 | Pedoman | `resources/PEDOMAN-KP-2026.md` |
+| Submodule SIAKAD | [KONFIRMASI: dipakai / tidak dipakai] |
+
+## Bootstrap repo
+
+| Langkah | Status |
+| ------- | ------ |
+| Rules KP (`.cursor/rules/`) | belum |
+| Kerangka folder dan progress | belum |
+| Skrip `scripts/` | belum |
+| Pedoman di `resources/` | belum |
+| DOCX resmi di `laporan/` | belum |
+| Submodule `siakad/` (opsional) | belum |
 
 ## Status bab
 

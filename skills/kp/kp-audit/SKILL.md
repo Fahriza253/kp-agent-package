@@ -63,7 +63,7 @@ Jika pengguna meminta rentang yang lebih sempit (misalnya hanya BAB IV), batasi 
 
 - Usulan perbaikan berupa arah atau kalimat contoh singkat, bukan paragraf final. Penulisan final dikerjakan lewat `kp-draft-section`.
 - Jangan menyatakan bahwa klaim salah jika bukti yang ada hanya belum dicantumkan di naskah. Bedakan "tidak ada bukti" dari "bukti ada tetapi belum ditulis".
-- Jangan menilai kualitas sistem dari naskah saja. Jika pertanyaan menyangkut implementasi, periksa dokumentasi dan kode di submodule `siakad/` (branch `dev`) sesuai `AGENTS.md`.
+- Jangan menilai kualitas sistem dari naskah saja. Jika pertanyaan menyangkut implementasi dan **Submodule SIAKAD** = dipakai di `progress-laporan.md`, periksa dokumentasi dan kode di submodule `siakad/` (branch `dev`) sesuai `AGENTS.md`.
 
 ## 3. Mode audit (menyeluruh)
 

@@ -17,7 +17,7 @@ Baca `docs/agents/progress-laporan.md`. Dari berkas itu, ambil:
 - keputusan yang menunggu konfirmasi;
 - catatan sesi terakhir.
 
-Jika berkas tidak ada, beri tahu pengguna dan tawarkan membuat kerangka berkas dari template di `docs/agents/progress-laporan.md`. Jangan membuat berkas tanpa konfirmasi.
+Jika berkas tidak ada, kenali intent **SETUP**, muat skill `setup-kp-repo`, dan tawarkan bootstrap (rules, scaffold, tooling). Template progress ada di skill `setup-kp-scaffold` dan, setelah scaffold, di `docs/agents/progress-laporan.md`. Jangan membuat berkas tanpa konfirmasi.
 
 Jika status berkas bertentangan dengan draf yang sebenarnya (misalnya status menyebut bab V selesai tetapi bab itu tidak ada di draf), tampilkan konfliknya dan tanyakan sebelum bekerja.
 
@@ -36,6 +36,7 @@ Pilih satu intent utama. Jika pengguna meminta beberapa hal, urutkan dan kerjaka
 | LEARN        | "pelajari sumber ini", "ini contoh laporan", "ini pedoman lain", lampiran contoh | `kp-source-learning`                                                    |
 | HUMANIZE     | "humanize", "deslop", "kurangi kesan AI", "rapikan gaya"                         | `academic-humanize`, `kp-10`, `kp-00`; lihat catatan di bawah           |
 | SYNC         | "buat DOCX", "port ke Word", "sinkronkan"                                        | `kp-docx-sync`                                                          |
+| SETUP        | "setup repo", "bootstrap laporan", progress/draf belum ada, "pasang KP dari nol" | `setup-kp-repo`, `setup-kp-rules`, `setup-kp-scaffold`, `setup-kp-tooling` |
 | STATUS       | "di mana posisi kita", "apa yang belum", "ringkasan kemajuan"                    | Hanya `docs/agents/progress-laporan.md` dan `kp-00`                     |
 
 Catatan HUMANIZE: pengguna dapat menjalankan skill ini sendiri, atau meminta agen lain melakukannya. Dalam kedua kasus, agen wajib membaca `kp-00` dan `kp-10` dan menyertakan brief serah terima dari `academic-humanize` bagian 8.

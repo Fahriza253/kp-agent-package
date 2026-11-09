@@ -58,3 +58,15 @@ _Avoid_: decision log (gunakan ADR)
 **Sumber kebenaran (repo laporan)**:
 Tabel path di `kp-00-core.mdc` di workspace pengguna setelah rules disalin (draf, pedoman, progress, knowledge).
 _Avoid_: source of truth (gunakan istilah Indonesia di narasi laporan)
+
+**Kontrak layout repo laporan**:
+Himpunan path minimum yang skill KP asumsikan sudah ada setelah bootstrap (`laporan/`, `docs/agents/progress-laporan.md`, `scripts/`, dan sejenisnya). Diverifikasi `setup-kp-repo` lewat `verify-layout.sh`.
+_Avoid_: folder structure, repo schema
+
+**Bootstrap repo laporan**:
+Fase menyiapkan kontrak layout, rules, scaffold, dan tooling sebelum intent DRAFT/AUDIT produktif. Diatur skill `setup-kp-*`.
+_Avoid_: onboarding KP (terlalu generik)
+
+**Keluarga setup-kp**:
+Skill `setup-kp-repo`, `setup-kp-scaffold`, `setup-kp-rules`, `setup-kp-tooling`; `kp-install-rules` sebagai alias rules.
+_Avoid_: setup skills (tanpa awalan kp)
