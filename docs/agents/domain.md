@@ -2,6 +2,8 @@
 
 How agents should consume domain documentation in **kp-agent-package**, and how that relates to a **repositori laporan** setelah pemasangan.
 
+Repositori paket: https://github.com/Fahriza253/kp-agent-package (`Fahriza253/kp-agent-package` untuk `npx skills add`).
+
 ## Dua lingkungan kerja
 
 | Lingkungan | Cakupan | Mulai dari |

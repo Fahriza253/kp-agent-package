@@ -2,6 +2,9 @@
 
 Repositori ini menerbitkan **skill** penulisan laporan KP (dan lapisan akademik reusable) untuk Cursor, plus **rules** proyek di `.cursor/rules/`. Skill engineering pihak ketiga ada di `.agents/skills/` lewat `skills-lock.json`.
 
+- **GitHub (publik)**: https://github.com/Fahriza253/kp-agent-package
+- **Skills CLI**: `npx skills@latest add Fahriza253/kp-agent-package -a cursor`
+
 - **Edit katalog**: `skills/academic/`, `skills/kp/`
 - **Dogfooding**: salinan skill yang sama di `.agents/skills/`
 - **Rules**: `.cursor/rules/` (salin ke repo laporan pengguna; tidak ikut `npx skills`)

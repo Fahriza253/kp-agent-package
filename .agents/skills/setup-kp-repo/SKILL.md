@@ -17,8 +17,10 @@ Skill ini memandu penyiapan repo laporan sebelum `kp-intent-router` produktif un
 1. **Skill CLI** (instruksikan pengguna jika belum):
 
    ```bash
-   npx skills@latest add <owner>/<repo-kp-agent-package> -a cursor
+   npx skills@latest add Fahriza253/kp-agent-package -a cursor
    ```
+
+   Repositori: https://github.com/Fahriza253/kp-agent-package
 
 2. **Rules** (`setup-kp-rules`):
 

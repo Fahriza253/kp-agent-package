@@ -4,7 +4,7 @@ Paket skill dan rules Cursor untuk Laporan Kerja Praktik Teknik Informatika UNPI
 
 ## Struktur repositori
 
-```
+```text
 skills/
   academic/                  Skill reusable (SKILL.md per folder)
   kp/                        Skill khusus KP
@@ -15,14 +15,14 @@ docs/agents/                 Dokumentasi agen (domain, progress template, dll.)
 
 ## Pemasangan di workspace laporan
 
-Ganti `<owner>/<repo>` dengan URL GitHub paket ini setelah dipublish.
+Repositori paket: [github.com/Fahriza253/kp-agent-package](https://github.com/Fahriza253/kp-agent-package) (`Fahriza253/kp-agent-package` untuk Skills CLI).
 
 ### 1. Skill (Skills CLI)
 
 Dari root repositori laporan:
 
 ```bash
-npx skills@latest add <owner>/<repo> -a cursor
+npx skills@latest add Fahriza253/kp-agent-package -a cursor
 ```
 
 Pilih skill yang diinginkan (semua `kp-*` dan/atau `academic-*`). CLI memasang ke **`.agents/skills/<nama>/`**. Untuk skill global di semua proyek, tambahkan `-g`.
@@ -60,12 +60,13 @@ Mulai sesi dengan: "Setup repo KP" atau "Cek posisi laporan, lalu ringkas BAB IV
    # atau: bash scripts/sync_catalog_to_agents.sh
    ```
 
-   Skrip menyelaraskan `.agents/skills/` dan bundle rules di `kp-install-rules`.
+   Skrip menyelaraskan `.agents/skills/` dan bundle rules di `kp-install-rules` dan `setup-kp-rules`.
+
 3. Skill engineering: `npx skills@latest add mattpocock/skills -a cursor` (pin di `skills-lock.json`).
 
 ## Verifikasi CLI
 
-Diuji: `npx skills@latest add <path-atau-github-repo> -a cursor -y` mendeteksi skill di `skills/academic/` dan `skills/kp/` (termasuk keluarga `setup-kp-*` dan `kp-install-rules`).
+Diuji: `npx skills@latest add Fahriza253/kp-agent-package -a cursor -y` (atau path lokal ke clone paket) mendeteksi skill di `skills/academic/` dan `skills/kp/` (termasuk keluarga `setup-kp-*` dan `kp-install-rules`).
 
 ## Cara kerja agen (di repo laporan)
 
@@ -107,4 +108,3 @@ Singkatan `kp-10` dan `kp-20` di dalam skill merujuk ke `kp-10-pedoman-format.md
 
 - Edisi APA yang berlaku di kampus.
 - Perilaku Cursor untuk `paths`, `alwaysApply`, dan discovery skill di versi tim Anda.
-- URL repo GitHub untuk `npx skills add` setelah publish (path lokal sudah valid untuk uji).
