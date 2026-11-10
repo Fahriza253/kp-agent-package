@@ -15,7 +15,7 @@ Dokumentasi rinci untuk generator ada di `docs/agents/generate-laporan-docx.md`.
 - Jangan jalankan generator dengan `--out` yang mengarah ke naskah Word resmi, kecuali pengguna meminta dan memahami risikonya.
 - Template di `laporan/` tidak diubah.
 - Setiap pembuatan DOCX memerlukan konfirmasi pengguna: sumber, output, dan bagian yang berubah.
-- Gambar dari Markdown tidak di-embed. Generator menulis catatan kuning untuk sisip manual.
+- Gambar di-resolve ke `laporan/assets/images/` (lihat `extract_laporan_docx_images.py` dan `manifest.json`). Bila berkas tidak ada, generator menulis catatan kuning untuk sisip manual.
 
 ## 2. Alur
 
@@ -42,7 +42,7 @@ Dari dokumentasi generator dan pemeriksaan draf:
 
 - **Didukung**: heading BAB dan subbab, paragraf, daftar bernomor, daftar pustaka, tebal, miring, kode inline, tautan.
 - **Tidak direplikasi persis**: tabel (baris diawali `|` diperlakukan sebagai teks dengan peringatan), blok kode fence, blockquote, heading level 5 dan 6.
-- **Tidak di-embed**: gambar. Diganti catatan kuning.
+- **Gambar**: disisipkan bila path Markdown mengarah ke berkas yang ada; `laporan/assets/images/README.md`. Bila tidak ada berkas, diganti catatan kuning.
 - **Di luar cakupan skrip**: daftar isi otomatis, daftar gambar dan tabel, nomor halaman, margin khusus bagian awal.
 
 Saat ini draf `DRAFT_KP.md` tidak memuat tabel, gambar, atau blok kode, sehingga keterbatasan ini belum berdampak. Jika bagian baru memuatnya, periksa hasil generate secara manual lebih ketat.

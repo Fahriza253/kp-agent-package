@@ -6,8 +6,13 @@ bernomor otomatis, daftar bernomor, dan gaya daftar pustaka ikut terbawa.
 Isi naskah diambil dari `laporan/ARCHIVE/DRAFT_KP.md`.
 
 Hasil selalu berupa berkas baru. Berkas template dan berkas output yang
-sudah ada tidak pernah ditimpa. Gambar dilewati dan diganti catatan
-yang disorot kuning agar mudah dicari.
+sudah ada tidak pernah ditimpa. Gambar pada Markdown disisipkan bila
+berkasnya ada (registri `laporan/assets/images/manifest.json` atau path
+relatif yang dapat di-resolve). Bila berkas tidak ditemukan, diganti
+catatan yang disorot kuning agar mudah dicari.
+
+Ekstraksi gambar dari naskah Word resmi:
+    .venv/bin/python scripts/extract_laporan_docx_images.py
 
 Dependensi: lihat `scripts/requirements-docx.txt`.
 
@@ -37,11 +42,24 @@ from docx.styles.style import BaseStyle
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
-from docx.shared import Pt, RGBColor, Twips
+from docx.shared import Inches, Pt, RGBColor, Twips
 from docx.text.paragraph import Paragraph as DocxParagraph
 from docx.text.run import Run
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+from laporan_image_assets import (  # noqa: E402
+    DEFAULT_ASSETS_DIR,
+    ImageAssetEntry,
+    build_src_lookup,
+    load_manifest,
+    manifest_path,
+    resolve_image_path,
+)
+
+PROJECT_ROOT = SCRIPTS_DIR.parent
 DEFAULT_SOURCE = PROJECT_ROOT / "laporan" / "ARCHIVE" / "DRAFT_KP.md"
 DEFAULT_TEMPLATE = (
     PROJECT_ROOT
@@ -183,14 +201,25 @@ class MarkdownParser:
 class LaporanDocxBuilder:
     """Tulis blok Markdown ke dokumen baru yang memakai gaya template."""
 
-    def __init__(self, template: Path) -> None:
+    def __init__(
+        self,
+        template: Path,
+        *,
+        source_md: Path,
+        assets_dir: Path,
+        image_entries: list[ImageAssetEntry],
+    ) -> None:
         self.document = Document(str(template))
         self._clear_body()
         self._drop_media_relationships()
         self._numbering = self.document.part.numbering_part.element
         self._decimal_abstract_id = _find_decimal_abstract_id(self._numbering)
+        self._source_md = source_md
+        self._assets_dir = assets_dir
+        self._image_lookup = build_src_lookup(image_entries)
         self.warnings: list[str] = []
         self.skipped_images: list[str] = []
+        self.embedded_images: list[str] = []
         self.counts: Counter[str] = Counter()
         self._pending_chapter = False
         self._in_bibliography = False
@@ -209,7 +238,7 @@ class LaporanDocxBuilder:
                 case ListItem(number=number, text=text):
                     self._add_list_item(number, text)
                 case Image(alt=alt, src=src):
-                    self._add_image_note(alt, src)
+                    self._add_image(alt, src)
 
     def finish(self) -> None:
         self._close_pending_chapter()
@@ -301,6 +330,47 @@ class LaporanDocxBuilder:
             paragraph, text, RunFormat(font_name=BODY_FONT, size=BODY_SIZE)
         )
         self.counts["list_item"] += 1
+
+    def _add_image(self, alt: str, src: str) -> None:
+        self._close_pending_chapter()
+        resolved = resolve_image_path(
+            src,
+            project_root=PROJECT_ROOT,
+            source_md=self._source_md,
+            assets_dir=self._assets_dir,
+            lookup=self._image_lookup,
+        )
+        if resolved is None:
+            self._add_image_note(alt, src)
+            return
+
+        entry = self._image_lookup.get(src.replace("\\", "/"))
+        if entry is None:
+            entry = self._image_lookup.get(src)
+        if entry is None:
+            entry = self._image_lookup.get(resolved.name)
+
+        paragraph = self.document.add_paragraph()
+        paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        paragraph.paragraph_format.first_line_indent = Twips(0)
+        run = paragraph.add_run()
+        width = entry.width_inches if entry and entry.width_inches else None
+        if width:
+            run.add_picture(str(resolved), width=Inches(width))
+        else:
+            run.add_picture(str(resolved))
+
+        caption = (alt or (entry.caption if entry else "")).strip()
+        if caption:
+            caption_paragraph = self.document.add_paragraph()
+            caption_paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            caption_paragraph.paragraph_format.first_line_indent = Twips(0)
+            caption_run = caption_paragraph.add_run(caption)
+            caption_run.font.name = BODY_FONT
+            caption_run.font.size = BODY_SIZE
+
+        self.embedded_images.append(str(resolved))
+        self.counts["image"] += 1
 
     def _add_image_note(self, alt: str, src: str) -> None:
         self._close_pending_chapter()
@@ -483,6 +553,12 @@ def parse_args(argv: list[str] | None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
+    parser.add_argument(
+        "--assets-dir",
+        type=Path,
+        default=PROJECT_ROOT / DEFAULT_ASSETS_DIR,
+        help="Folder aset gambar dan manifest.json.",
+    )
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument(
         "--out", type=Path, default=None,
@@ -501,7 +577,15 @@ def main(argv: list[str] | None = None) -> int:
     markdown = MarkdownParser()
     blocks = markdown.parse(args.source.read_text(encoding="utf-8"))
 
-    builder = LaporanDocxBuilder(args.template)
+    manifest = manifest_path(args.assets_dir)
+    image_entries = load_manifest(manifest) if manifest.is_file() else []
+
+    builder = LaporanDocxBuilder(
+        args.template,
+        source_md=args.source,
+        assets_dir=args.assets_dir,
+        image_entries=image_entries,
+    )
     builder.add_blocks(blocks)
     builder.finish()
 
@@ -515,6 +599,10 @@ def main(argv: list[str] | None = None) -> int:
     print("Ringkasan:")
     for key in sorted(builder.counts):
         print(f"  {key:<12} {builder.counts[key]}")
+    if builder.embedded_images:
+        print(f"Gambar disisipkan ({len(builder.embedded_images)}):")
+        for path in builder.embedded_images:
+            print(f"  - {path}")
     if builder.skipped_images:
         print(f"Gambar dilewati ({len(builder.skipped_images)}):")
         for src in builder.skipped_images:

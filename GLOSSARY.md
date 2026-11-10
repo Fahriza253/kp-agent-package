@@ -1,80 +1,47 @@
-# Paket Agen Penulisan Laporan KP
+# Glosarium (Laporan KP)
 
-Kosakata untuk repositori **kp-agent-package**: paket skill Cursor yang dapat di-install ke workspace pengguna. Bukan glosarium isi laporan atau domain SIAKAD (itu milik repositori laporan pengguna).
+Istilah yang dipakai agen dan dokumentasi proyek saat mengerjakan naskah laporan.
 
-## Arsitektur paket
+## Naskah Word resmi
 
-**Lapisan reusable**:
-Skill penulisan akademik umum di `skills/academic/` (misalnya `academic-writing-core`, `academic-humanize`).
-_Avoid_: skill generik (ambigu dengan skill engineering Matt Pocock)
+Berkas `laporan/DRAFT LAPORAN KP - SIAKAD FT - DAFA FAWAZ.docx`. Naskah kerja utama untuk tata letak, gaya Word, nomor halaman, daftar isi otomatis, dan penyerahan akhir. Agen tidak mengganti peran DOCX sebagai acuan format cetak; perubahan teks substantif dimulai dari naskah Markdown kerja kecuali pengguna meminta sebaliknya.
 
-**Lapisan KP**:
-Skill khusus Laporan Kerja Praktik UNPI Cianjur di `skills/kp/` (`kp-intent-router`, `kp-draft-section`, dan sejenisnya).
-_Avoid_: layer laporan, modul KP (tanpa menyebut rules)
+## Naskah Markdown kerja
 
-**Katalog skill**:
-Tree `skills/<kategori>/<nama>/SKILL.md` yang di-clone CLI dari repo GitHub saat `npx skills add`.
-_Avoid_: artefak pemasangan, folder resources
+Berkas `laporan/ARCHIVE/DRAFT_KP.md`. Representasi teks laporan untuk revisi di repositori: diff Git, tinjauan agen, dan penyuntingan bab. Isinya selaras dengan naskah Word resmi; Markdown bukan pengganti paginasi atau template Word.
 
-**Rules KP**:
-Berkas `.mdc` di `.cursor/rules/` repo penerbit. Pengguna memasang lewat skill `kp-install-rules` atau salin manual; tidak ikut `npx skills` otomatis.
-_Avoid_: skill rules (rules bukan skill)
+## Sinkronisasi naskah
 
-**Sinkronisasi katalog**:
-Skrip `scripts/sync_catalog_to_agents.sh` menyalin `skills/` ke `.agents/skills/` dan memperbarui bundle rules di `kp-install-rules`.
-_Avoid_: sync manual (kecuali darurat)
+Proses menjaga teks Markdown kerja dan naskah Word resmi selaras. Alur baku: edit `DRAFT_KP.md`, lalu port perubahan ke DOCX (salin/tempel terarah, `scripts/generate_laporan_docx.py`, atau konversi yang disetujui pengguna). Setelah port, verifikasi struktur bab dan format Word di DOCX. Prinsip agen: `AGENTS.md`.
 
-**Skill terpasang**:
-Salinan skill di workspace pengguna setelah instalasi, biasanya `.agents/skills/<nama>/`.
-_Avoid_: plugin skill (kecuali konteks marketplace Cursor)
+## Generator DOCX dari Markdown (`generate_laporan_docx.py`)
 
-**Skill engineering**:
-Skill pihak ketiga (misalnya Matt Pocock) di-pin lewat `skills-lock.json` dan disimpan di `.agents/skills/` di repo penerbit.
-_Avoid_: matt skills
+Skrip `scripts/generate_laporan_docx.py` membuat berkas `.docx` **baru** dari `DRAFT_KP.md` dengan gaya template naskah Word resmi. Template dan DOCX resmi di `laporan/` tidak ditimpa; keluaran baku disimpan di `laporan/GENERATED/` (nama ber-cap waktu). Gambar di-resolve ke `laporan/assets/images/` (registri `manifest.json`); ekstraksi dari Word resmi: `scripts/extract_laporan_docx_images.py`. Bila berkas tidak ada, diganti catatan untuk sisip manual. Detail: docstring skrip dan `laporan/assets/images/README.md`.
 
-## Routing dan intent
+## Paket skill penulisan KP
 
-**Intent**:
-Kategori tugas penulisan KP yang dipilih `kp-intent-router` (misalnya DRAFT, AUDIT, SYNC, LEARN).
-_Avoid_: mode, task type (untuk tugas KP)
+Tiga berkas di `.custom-skills/my-research-paper-writing/` yang **wajib** dipakai agen saat menyusun atau merevisi teks draft laporan: skill utama `research-paper-writing-skills.md`, lapisan gaya `human-academic-writing-kp-skills.md`, dan pemeriksaan alur `does-my-writing-flow-skills.md`. Urutan dan prioritas: bagian Penulisan draft KP di `AGENTS.md`.
 
-**Peta intent**:
-Tabel di `README.md` yang memetakan intent ke skill utama KP.
+## Referensi Kerja Praktik
 
-**Panduan penggunaan skill**:
-Dokumen `docs/agents/panduan-penggunaan-skills.md` berisi skenario SETUP, alur sesi, dan contoh permintaan chat per intent.
-_Avoid_: user guide generik (tanpa konteks KP)
+Folder `resources/` menyimpan **bahan rujukan** pengerjaan KP (pedoman kampus dan konteks proyek). Indeks lengkap, prioritas pemakaian, dan peringatan bundel teknis: `resources/README.md`.
 
-## Pelacakan kerja
+| Jenis rujukan                  | Lokasi                                                     | Peran singkat                                                                                              |
+| ------------------------------ | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Pedoman kampus                 | `resources/PEDOMAN-KP-2026.md`                             | Panduan utama FT UNPI: struktur laporan, penyusunan, pengetikan                                            |
+| Catatan implementasi developer | `resources/technical/` (`README.md`, bundel `SIAKAD_*.md`) | Murni catatan developer SIAKAD; bukan naskah KP; non-SSOT, verifikasi sebelum klaim di laporan             |
+| Jurnal rujukan KP              | `resources/journal/` (`README.md`, PDF)                    | Literatur pendukung landasan teori; petunjuk penulisan; sitasi ke naskah hanya setelah konfirmasi pengguna |
+| Masukan pembimbing             | `revisi/`                                                  | Arah revisi setelah selaras dengan pedoman                                                                 |
 
-**Issue tracker lokal**:
-Spesifikasi dan tiket di `.scratch/<feature-slug>/`. Lihat `docs/agents/issue-tracker.md`.
+## Sumber kebenaran menurut tugas
 
-**Status triage**:
-Pada berkas isu lokal, peran triage ditulis di baris `Status:`. Lihat `docs/agents/triage-labels.md`.
-
-## Dokumentasi domain
-
-**ADR**:
-Keputusan arsitektur paket di `docs/adr/`, termasuk layout instalasi (ADR-0002).
-_Avoid_: decision log (gunakan ADR)
-
-**Sumber kebenaran (repo laporan)**:
-Tabel path di `kp-00-core.mdc` di workspace pengguna setelah rules disalin (draf, pedoman, progress, knowledge).
-_Avoid_: source of truth (gunakan istilah Indonesia di narasi laporan)
-
-**Kontrak layout repo laporan**:
-Himpunan path minimum yang skill KP asumsikan sudah ada setelah bootstrap. Diverifikasi `setup-kp-repo` lewat `verify-layout.sh`.
-_Avoid_: folder structure, repo schema
-
-**Kontrak dokumen workspace**:
-Peta dependensi tiap skill KP terhadap berkas repo laporan. Kanonik di `skills/kp/references/workspace-document-contract.md`; salinan di repo laporan `docs/agents/workspace-document-contract.md` setelah scaffold.
-_Avoid_: dependency map
-
-**Bootstrap repo laporan**:
-Fase menyiapkan kontrak layout, rules, scaffold, dan tooling sebelum intent DRAFT/AUDIT produktif. Diatur skill `setup-kp-*`.
-_Avoid_: onboarding KP (terlalu generik)
-
-**Keluarga setup-kp**:
-Skill `setup-kp-repo`, `setup-kp-scaffold`, `setup-kp-rules`, `setup-kp-tooling`; `kp-install-rules` sebagai alias rules.
-_Avoid_: setup skills (tanpa awalan kp)
+| Tugas agen                                                     | Sumber utama                                                                                               |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Revisi teks, struktur bab, diff, commit                        | `laporan/ARCHIVE/DRAFT_KP.md`                                                                              |
+| Draft DOCX baru dari Markdown (gaya template, non-destructive) | `scripts/generate_laporan_docx.py` → `laporan/GENERATED/`; docstring skrip                                 |
+| Format halaman, gaya institusi, DOCX final                     | `laporan/DRAFT LAPORAN KP - SIAKAD FT - DAFA FAWAZ.docx`                                                   |
+| Pedoman struktur dan ketentuan KP                              | `resources/PEDOMAN-KP-2026.md` (indeks: `resources/README.md`)                                             |
+| Fakta proyek SIAKAD (klaim implementasi, domain)               | Kode, pengujian, dan dokumen sumber proyek; `resources/technical/` hanya catatan developer untuk navigasi  |
+| Landasan teori dan gaya kajian pustaka (agen)                  | `resources/journal/` (baca untuk arah tulisan); kutipan ke naskah setelah konfirmasi pengguna + pedoman KP |
+| Masukan pembimbing                                             | `revisi/`                                                                                                  |
+| Struktur bab, klaim–bukti, gaya, alur tulisan (agen)           | `.custom-skills/my-research-paper-writing/` (tiga berkas skill; `AGENTS.md`)                               |
