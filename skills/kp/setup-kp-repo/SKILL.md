@@ -28,7 +28,7 @@ Skill ini memandu penyiapan repo laporan sebelum `kp-intent-router` produktif un
    bash .agents/skills/setup-kp-rules/scripts/install-rules.sh .
    ```
 
-   Alias: `kp-install-rules` memanggil skrip yang sama.
+   `kp-install-rules` tidak lagi disarankan (alias lama); gunakan `setup-kp-rules`.
 
 3. **Scaffold** (`setup-kp-scaffold`):
 
@@ -53,8 +53,6 @@ Skill ini memandu penyiapan repo laporan sebelum `kp-intent-router` produktif un
    - Salin pedoman ke `resources/PEDOMAN-KP-2026.md`.
    - Salin DOCX resmi ke `laporan/`; catat path pasti di baris **Naskah Word resmi** pada `docs/agents/progress-laporan.md`.
    - Isi judul KP dan status submodule SIAKAD (`dipakai` / `tidak dipakai`) di progress.
-   - Pasang `.custom-skills/my-research-paper-writing/` bila dipakai (per mahasiswa).
-
 7. **Submodule SIAKAD (opsional, default disarankan untuk proyek implementasi)**:
    - Jika dipakai: `git submodule add <url-siakad> siakad` dan checkout branch `dev` sesuai kebijakan tim.
    - Jika tidak: set **Submodule SIAKAD** ke `tidak dipakai` di progress; agen tidak boleh mengasumsikan path `siakad/` ada.
@@ -68,7 +66,7 @@ Skill ini memandu penyiapan repo laporan sebelum `kp-intent-router` produktif un
 | Rules `.mdc` | `setup-kp-rules` |
 | Folder dan progress | `setup-kp-scaffold` |
 | `scripts/` | `setup-kp-tooling` |
-| Pedoman, DOCX, custom-skills | manual pengguna |
+| Pedoman, DOCX | manual pengguna |
 | `siakad/` | opsional git submodule |
 | Verifikasi | `verify-layout.sh` |
 
@@ -79,6 +77,12 @@ Skill ini memandu penyiapan repo laporan sebelum `kp-intent-router` produktif un
 - Menginisialisasi submodule tanpa URL dan konfirmasi.
 - Menimpa DOCX atau draf yang sudah berisi teks.
 
+## Kontrak dokumen
+
+Peta dependensi skill dan path: `references/workspace-document-contract.md` (dalam skill ini). Salinan di repo laporan: `docs/agents/workspace-document-contract.md` setelah scaffold.
+
 ## Setelah setup
 
 Arahkan pengguna ke `kp-intent-router` dengan intent STATUS atau DRAFT.
+
+Panduan contoh sesi berikutnya (paket): `docs/agents/panduan-penggunaan-skills.md`.

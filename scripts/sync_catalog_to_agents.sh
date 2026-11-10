@@ -10,6 +10,7 @@ sync_category() {
   local dir
   for dir in "$ROOT/skills/$category"/*/; do
     [ -d "$dir" ] || continue
+    [ -f "${dir}SKILL.md" ] || continue
     local name
     name="$(basename "$dir")"
     rm -rf "$ROOT/.agents/skills/$name"

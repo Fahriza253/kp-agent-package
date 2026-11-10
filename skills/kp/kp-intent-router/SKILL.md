@@ -7,6 +7,8 @@ description: Titik masuk untuk setiap tugas penulisan Laporan Kerja Praktik. Mem
 
 Skill ini dipakai di awal setiap tugas. Ia memastikan agen tahu posisi naskah, tahu apa yang diminta, dan memuat konteks yang tepat tanpa membebani sesi.
 
+Contoh permintaan pengguna per intent (repo paket): `docs/agents/panduan-penggunaan-skills.md`. Di repo laporan setelah scaffold, salin atau tautkan berkas itu bila tim memakai salinan lokal.
+
 ## Langkah 1. Baca status
 
 Baca `docs/agents/progress-laporan.md`. Dari berkas itu, ambil:
@@ -18,6 +20,8 @@ Baca `docs/agents/progress-laporan.md`. Dari berkas itu, ambil:
 - catatan sesi terakhir.
 
 Jika berkas tidak ada, kenali intent **SETUP**, muat skill `setup-kp-repo`, dan tawarkan bootstrap (rules, scaffold, tooling). Template progress ada di skill `setup-kp-scaffold` dan, setelah scaffold, di `docs/agents/progress-laporan.md`. Jangan membuat berkas tanpa konfirmasi.
+
+Jika progress ada tetapi audit VALIDATE atau `verify-layout.sh` menunjukkan berkas hilang, arahkan ke `setup-kp-repo` atau langkah setup yang sesuai. Peta lengkap: `skills/kp/references/workspace-document-contract.md` (di repo paket) atau salinan di dokumentasi tim Anda.
 
 Jika status berkas bertentangan dengan draf yang sebenarnya (misalnya status menyebut bab V selesai tetapi bab itu tidak ada di draf), tampilkan konfliknya dan tanyakan sebelum bekerja.
 

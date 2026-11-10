@@ -16,7 +16,9 @@ Path naskah (`laporan/`, `siakad/`, `revisi/`) hanya ada di repo laporan penggun
 ## Before exploring, read these
 
 - **`GLOSSARY.md`** at the repo root.
+- **`docs/agents/panduan-penggunaan-skills.md`**: contoh penggunaan lengkap skill di repo laporan.
 - **`docs/adr/`**, terutama ADR-0002 untuk layout instalasi.
+- **`skills/kp/references/workspace-document-contract.md`**: kontrak path repo laporan.
 - **`.cursor/rules/kp-00-core.mdc`**: tabel path dan konfirmasi untuk kerja KP (disalin ke repo laporan).
 
 ## File structure (single-context)
