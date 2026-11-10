@@ -84,3 +84,5 @@ Peta dependensi skill dan path: `references/workspace-document-contract.md` (dal
 ## Setelah setup
 
 Arahkan pengguna ke `kp-intent-router` dengan intent STATUS atau DRAFT.
+
+Panduan contoh sesi berikutnya (paket): `docs/agents/panduan-penggunaan-skills.md`.

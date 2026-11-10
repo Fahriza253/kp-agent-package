@@ -9,7 +9,7 @@ Repositori ini menerbitkan **skill** penulisan laporan KP (dan lapisan akademik 
 - **Dogfooding**: salinan skill yang sama di `.agents/skills/`
 - **Rules**: `.cursor/rules/` (salin ke repo laporan pengguna; tidak ikut `npx skills`)
 
-Tugas KP di workspace laporan: muat skill `kp-intent-router` dan rules `kp-00-core.mdc`. Tugas pemeliharaan paket ini: skill engineering + dokumentasi di `docs/agents/`.
+Tugas KP di workspace laporan: muat skill `kp-intent-router` dan rules `kp-00-core.mdc`. Panduan contoh penggunaan: `docs/agents/panduan-penggunaan-skills.md`. Tugas pemeliharaan paket ini: skill engineering + dokumentasi di `docs/agents/`.
 
 ## Agent skills
 

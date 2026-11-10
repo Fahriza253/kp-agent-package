@@ -2,6 +2,8 @@
 
 Paket skill dan rules Cursor untuk Laporan Kerja Praktik Teknik Informatika UNPI Cianjur. Lapisan **reusable** (`skills/academic/`) dapat dipakai untuk skripsi atau makalah lain; lapisan **KP** (`skills/kp/`) mengikat pedoman dan alur naskah KP.
 
+**Panduan lengkap dengan contoh per intent:** [docs/agents/panduan-penggunaan-skills.md](docs/agents/panduan-penggunaan-skills.md).
+
 ## Struktur repositori
 
 ```text
@@ -75,6 +77,8 @@ Diuji: `npx skills@latest add Fahriza253/kp-agent-package -a cursor -y` (atau pa
 2. Tugas dimulai dari skill `kp-intent-router`.
 3. DRAFT/REVISE memakai `kp-draft-section` + `academic-writing-core`.
 4. Perubahan substantif, sitasi, knowledge, dan DOCX menunggu konfirmasi (lihat rule inti).
+
+Contoh dialog chat, perintah shell, dan alur SETUP sampai SYNC: [panduan penggunaan](docs/agents/panduan-penggunaan-skills.md).
 
 ## Peta intent
 

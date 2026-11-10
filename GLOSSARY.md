@@ -41,6 +41,10 @@ _Avoid_: mode, task type (untuk tugas KP)
 **Peta intent**:
 Tabel di `README.md` yang memetakan intent ke skill utama KP.
 
+**Panduan penggunaan skill**:
+Dokumen `docs/agents/panduan-penggunaan-skills.md` berisi skenario SETUP, alur sesi, dan contoh permintaan chat per intent.
+_Avoid_: user guide generik (tanpa konteks KP)
+
 ## Pelacakan kerja
 
 **Issue tracker lokal**:

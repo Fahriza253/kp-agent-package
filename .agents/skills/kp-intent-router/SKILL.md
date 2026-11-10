@@ -7,6 +7,8 @@ description: Titik masuk untuk setiap tugas penulisan Laporan Kerja Praktik. Mem
 
 Skill ini dipakai di awal setiap tugas. Ia memastikan agen tahu posisi naskah, tahu apa yang diminta, dan memuat konteks yang tepat tanpa membebani sesi.
 
+Contoh permintaan pengguna per intent (repo paket): `docs/agents/panduan-penggunaan-skills.md`. Di repo laporan setelah scaffold, salin atau tautkan berkas itu bila tim memakai salinan lokal.
+
 ## Langkah 1. Baca status
 
 Baca `docs/agents/progress-laporan.md`. Dari berkas itu, ambil:
