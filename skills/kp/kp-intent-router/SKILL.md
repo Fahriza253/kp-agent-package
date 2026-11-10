@@ -19,6 +19,8 @@ Baca `docs/agents/progress-laporan.md`. Dari berkas itu, ambil:
 
 Jika berkas tidak ada, kenali intent **SETUP**, muat skill `setup-kp-repo`, dan tawarkan bootstrap (rules, scaffold, tooling). Template progress ada di skill `setup-kp-scaffold` dan, setelah scaffold, di `docs/agents/progress-laporan.md`. Jangan membuat berkas tanpa konfirmasi.
 
+Jika progress ada tetapi audit VALIDATE atau `verify-layout.sh` menunjukkan berkas hilang, arahkan ke `setup-kp-repo` atau langkah setup yang sesuai. Peta lengkap: `skills/kp/references/workspace-document-contract.md` (di repo paket) atau salinan di dokumentasi tim Anda.
+
 Jika status berkas bertentangan dengan draf yang sebenarnya (misalnya status menyebut bab V selesai tetapi bab itu tidak ada di draf), tampilkan konfliknya dan tanyakan sebelum bekerja.
 
 ## Langkah 2. Tentukan intent

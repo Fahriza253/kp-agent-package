@@ -28,7 +28,7 @@ Agen membantu menyusun, merevisi, mengaudit, dan memvalidasi Laporan Kerja Prakt
 | Keperluan                        | Lokasi                                                               |
 | -------------------------------- | -------------------------------------------------------------------- |
 | Naskah kerja (edit default)      | `laporan/ARCHIVE/DRAFT_KP.md`                                        |
-| Prosedur wajib penulisan draft   | `docs/agents/penulisan-kp-skills.md`                                 |
+| Prosedur wajib penulisan draft   | `docs/agents/penulisan-kp-skills.md`, panduan modular `docs/agents/draft-guides/` (indeks `README.md`) |
 | Istilah baku proyek              | `GLOSSARY.md` (gunakan istilah di sana, jangan sinonim yang dihindari) |
 | Alur naskah dan DOCX             | `docs/agents/laporan-naskah.md`, `docs/agents/generate-laporan-docx.md` |
 | Naskah Word resmi (format final) | Path di kolom **Naskah Word resmi** pada `docs/agents/progress-laporan.md` (biasanya di bawah `laporan/`) |

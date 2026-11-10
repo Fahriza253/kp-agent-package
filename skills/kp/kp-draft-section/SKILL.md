@@ -19,7 +19,7 @@ Sebelum menulis, pastikan sudah membaca:
 5. `revisi/` bila ada catatan pembimbing yang menyentuh bagian ini;
 6. sumber proyek yang relevan dengan bagian itu (lihat tabel di bagian 3).
 
-Sesuai `docs/agents/penulisan-kp-skills.md`, tiga berkas di `.custom-skills/my-research-paper-writing/` adalah skill wajib untuk menulis draft. Berkas itu berisi rincian per bab, yang tidak perlu disalin ke skill ini. Urutannya: `research-paper-writing-skills.md` (bagian relevan, hierarki sumber §3, workflow §4), `human-academic-writing-kp-skills.md` (§2.2 dan §3), lalu `does-my-writing-flow-skills.md` (§2 sampai §3) untuk paragraf naratif. Skill `academic-writing-core` di paket ini melengkapi, bukan menggantikan, ketiga berkas itu.
+Sesuai `docs/agents/penulisan-kp-skills.md`, panduan modular di **`docs/agents/draft-guides/`** (indeks `README.md`) wajib dibaca untuk menulis draft. Muat **hanya bagian yang relevan** dengan bab atau subbab yang dikerjakan: `research-paper-writing-skills.md` (§3, §4, dan §8.x untuk bab tersebut), `human-academic-writing-kp-skills.md` (§2.2 pasif; §3 bila humanize aktif), `does-my-writing-flow-skills.md` (§2–§3 untuk paragraf naratif). Skill `academic-writing-core` melengkapi panduan itu, bukan menggantikannya.
 
 Jangan membaca seluruh draf atau seluruh dokumentasi sekaligus kecuali diminta.
 

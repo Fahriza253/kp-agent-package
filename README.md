@@ -40,13 +40,14 @@ bash .agents/skills/setup-kp-tooling/scripts/install-tooling.sh .
 bash .agents/skills/setup-kp-repo/scripts/verify-layout.sh .
 ```
 
-Alias rules: `kp-install-rules` memakai bundle yang sama dengan `setup-kp-rules`.
+`kp-install-rules` hanya alias deprecated; gunakan `setup-kp-rules` atau `setup-kp-repo`.
 
 ### 3. Isian manual setelah scaffold
 
 - `resources/PEDOMAN-KP-2026.md` (dari sumber kampus)
 - DOCX resmi di `laporan/`; path dicatat di `docs/agents/progress-laporan.md`
-- Opsional: submodule `siakad/`, folder `.custom-skills/my-research-paper-writing/`
+- Opsional: submodule `siakad/`
+- Panduan draft modular: `docs/agents/draft-guides/` (dari `setup-kp-scaffold`)
 
 Mulai sesi dengan: "Setup repo KP" atau "Cek posisi laporan, lalu ringkas BAB IV." Agen memuat `kp-intent-router` (SETUP atau STATUS/DRAFT).
 

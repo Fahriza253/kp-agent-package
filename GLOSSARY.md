@@ -60,8 +60,12 @@ Tabel path di `kp-00-core.mdc` di workspace pengguna setelah rules disalin (draf
 _Avoid_: source of truth (gunakan istilah Indonesia di narasi laporan)
 
 **Kontrak layout repo laporan**:
-Himpunan path minimum yang skill KP asumsikan sudah ada setelah bootstrap (`laporan/`, `docs/agents/progress-laporan.md`, `scripts/`, dan sejenisnya). Diverifikasi `setup-kp-repo` lewat `verify-layout.sh`.
+Himpunan path minimum yang skill KP asumsikan sudah ada setelah bootstrap. Diverifikasi `setup-kp-repo` lewat `verify-layout.sh`.
 _Avoid_: folder structure, repo schema
+
+**Kontrak dokumen workspace**:
+Peta dependensi tiap skill KP terhadap berkas repo laporan. Kanonik di `skills/kp/references/workspace-document-contract.md`; salinan di repo laporan `docs/agents/workspace-document-contract.md` setelah scaffold.
+_Avoid_: dependency map
 
 **Bootstrap repo laporan**:
 Fase menyiapkan kontrak layout, rules, scaffold, dan tooling sebelum intent DRAFT/AUDIT produktif. Diatur skill `setup-kp-*`.

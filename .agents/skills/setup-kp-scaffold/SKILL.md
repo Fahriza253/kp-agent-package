@@ -22,7 +22,7 @@ Skill ini memenuhi **kontrak layout** yang direferensikan `kp-00-core.mdc` tanpa
    ```
 
 3. Minta pengguna mengisi di `docs/agents/progress-laporan.md`: judul, path DOCX resmi, dan apakah submodule `siakad/` dipakai.
-4. Ingatkan: salin `resources/PEDOMAN-KP-2026.md` dari sumber kampus; salin DOCX resmi ke `laporan/`; pasang `.custom-skills/my-research-paper-writing/` bila dipakai.
+4. Ingatkan: salin `resources/PEDOMAN-KP-2026.md`; salin DOCX resmi ke `laporan/`. Panduan draft sudah di `docs/agents/draft-guides/` (sesuaikan konteks proyek di progress).
 
 ## Yang dibuat
 
@@ -31,6 +31,8 @@ Skill ini memenuhi **kontrak layout** yang direferensikan `kp-00-core.mdc` tanpa
 | `docs/agents/progress-laporan.md` | Template dengan tabel bootstrap |
 | `laporan/ARCHIVE/DRAFT_KP.md` | Stub naskah |
 | `docs/agents/penulisan-kp-skills.md`, `laporan-naskah.md`, `generate-laporan-docx.md` | Panduan minimum |
+| `GLOSSARY.md`, `AGENTS.md` (akar repo) | Stub glosarium proyek dan konfirmasi jurnal |
+| `docs/agents/draft-guides/` | Panduan modular penulisan per bab |
 | `resources/README.md` | Petunjuk pedoman |
 | `revisi/`, `docs/agents/knowledge/`, `resources/journal/`, `laporan/GENERATED/` | Folder kosong |
 
