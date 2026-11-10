@@ -1,37 +1,26 @@
 ---
 name: kp-install-rules
-description: Alias pemasangan rules KP. Utamakan setup-kp-rules atau setup-kp-repo untuk bootstrap baru. Memasang kp-00, kp-10, kp-20 ke .cursor/rules/.
+description: "DEPRECATED: gunakan setup-kp-rules atau setup-kp-repo. Hanya memasang tiga rules .mdc ke .cursor/rules/."
+disable-model-invocation: true
 ---
 
-# KP Install Rules
+# KP Install Rules (deprecated)
 
-Skill ini **alias** untuk `setup-kp-rules` (bundle identik). Untuk repo baru, muat skill `setup-kp-repo` agar scaffold dan tooling ikut terpasang.
+Skill ini **tidak disarankan** untuk workflow baru.
 
-Rules KP tidak ikut instalasi `npx skills`. Skill ini memasang bundle rules dari paket ke `.cursor/rules/` workspace.
+## Gunakan sebagai gantinya
 
-## Prasyarat
+| Kebutuhan | Skill |
+| --------- | ----- |
+| Repo laporan baru | `setup-kp-repo` |
+| Hanya rules | `setup-kp-rules` |
 
-- Skill lain KP sudah terpasang lewat Skills CLI (opsional, tetapi disarankan).
-- Agen dijalankan dari **root repositori laporan** pengguna.
+Kedua skill di atas memakai bundle rules yang sama dengan skill ini.
 
-## Langkah
+## Jika tetap memanggil skill ini
 
-1. Konfirmasi path root workspace (default: direktori kerja saat ini).
-2. Jalankan:
+```bash
+bash .agents/skills/setup-kp-rules/scripts/install-rules.sh .
+```
 
-   ```bash
-   bash .agents/skills/kp-install-rules/scripts/install-rules.sh .
-   ```
-
-   Jika skill dipanggil dari repo pemeliharaan paket, path setara: `bash skills/kp/kp-install-rules/scripts/install-rules.sh /path/ke/repo-laporan`
-
-3. Verifikasi berkas ada: `kp-00-core.mdc`, `kp-10-pedoman-format.mdc`, `kp-20-sitasi-apa.mdc`.
-4. Ingatkan pengguna: `kp-00-core.mdc` mengasumsikan path naskah di repo laporan (`laporan/`, `docs/agents/progress-laporan.md`, dll.). Sesuaikan tabel sumber kebenaran bila struktur berbeda.
-
-## Template progress (opsional)
-
-Bundle menyertakan `assets/templates/progress-laporan.md`. Salin ke `docs/agents/progress-laporan.md` hanya setelah konfirmasi pengguna. Jangan menimpa berkas yang sudah berisi status.
-
-## Bila rules bentrok
-
-Jika `.cursor/rules/` sudah berisi rules lain, gabungkan manual atau backup dulu. Jangan menghapus rules pengguna tanpa konfirmasi.
+Perintah di atas setara dengan skrip lama `kp-install-rules` dan menerima template progress di bundle `setup-kp-rules` bila diperlukan.

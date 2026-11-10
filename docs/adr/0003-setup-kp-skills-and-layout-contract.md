@@ -10,13 +10,14 @@ Skill KP (`kp-intent-router`, `kp-audit`, `kp-docx-sync`, dan lain-lain) mengasu
 
 ## Decision
 
-1. **Keluarga skill bootstrap**: `setup-kp-repo` (orchestrator), `setup-kp-scaffold`, `setup-kp-rules`, `setup-kp-tooling`. `kp-install-rules` tetap sebagai alias bundle rules yang sama.
+1. **Keluarga skill bootstrap**: `setup-kp-repo` (orchestrator), `setup-kp-scaffold`, `setup-kp-rules`, `setup-kp-tooling`.
 2. **Bundle tooling**: skrip minimum disimpan di `setup-kp-tooling/assets/scripts/` dan disalin ke `scripts/` repo laporan lewat `install-tooling.sh`.
 3. **Kontrak layout**: folder kanonik tidak dikonfigurasi per path; hanya field `[KONFIRMASI:]` di `progress-laporan.md` (judul, path DOCX, status submodule).
 4. **DOCX resmi**: otoritas path pindah ke kolom **Naskah Word resmi** di progress; `kp-00` dan `kp-docx-sync` tidak memakai nama berkas mahasiswa tertentu.
 5. **Submodule `siakad/`**: opsional; progress memuat **Submodule SIAKAD** (`dipakai` / `tidak dipakai`).
 6. **Intent SETUP**: `kp-intent-router` memuat keluarga setup bila progress atau draf belum ada.
-7. **Artefak manual**: pedoman kampus, DOCX resmi, dan `.custom-skills/my-research-paper-writing/` tetap tanggung jawab pengguna (sumber per mahasiswa atau kampus).
+7. **Artefak manual**: pedoman kampus dan DOCX resmi. Panduan draft modular (`docs/agents/draft-guides/`) di-scaffold otomatis; konteks proyek disesuaikan di progress.
+8. **`kp-install-rules`**: deprecated; gunakan `setup-kp-rules` / `setup-kp-repo`.
 
 ## Consequences
 

@@ -30,6 +30,16 @@ copy_if_missing "$TEMPLATES/penulisan-kp-skills.md" "$TARGET_ROOT/docs/agents/pe
 copy_if_missing "$TEMPLATES/laporan-naskah.md" "$TARGET_ROOT/docs/agents/laporan-naskah.md"
 copy_if_missing "$TEMPLATES/generate-laporan-docx.md" "$TARGET_ROOT/docs/agents/generate-laporan-docx.md"
 copy_if_missing "$TEMPLATES/resources-README.md" "$TARGET_ROOT/resources/README.md"
+copy_if_missing "$TEMPLATES/GLOSSARY.md" "$TARGET_ROOT/GLOSSARY.md"
+copy_if_missing "$TEMPLATES/AGENTS.md" "$TARGET_ROOT/AGENTS.md"
+copy_if_missing "$TEMPLATES/workspace-document-contract.md" "$TARGET_ROOT/docs/agents/workspace-document-contract.md"
+
+mkdir -p "$TARGET_ROOT/docs/agents/draft-guides"
+for src in "$TEMPLATES/draft-guides/"*; do
+  [ -f "$src" ] || continue
+  base="$(basename "$src")"
+  copy_if_missing "$src" "$TARGET_ROOT/docs/agents/draft-guides/$base"
+done
 
 for d in "$TARGET_ROOT/docs/agents/knowledge" "$TARGET_ROOT/revisi" "$TARGET_ROOT/resources/journal" "$TARGET_ROOT/laporan/GENERATED"; do
   touch "$d/.gitkeep"
